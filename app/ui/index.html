@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Michi Music</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+  <aside class="sidebar">
+    <div class="brand">
+      <canvas class="michi-px" data-mood="auto" id="michiLogo"></canvas>
+      <div><b>Michi</b><span>Music</span></div>
+    </div>
+    <nav class="nav">
+      <button data-view="add" class="active"><i data-icon="link"></i>Agregar link</button>
+      <button data-view="library"><i data-icon="library"></i>Biblioteca</button>
+      <button data-view="liked"><i data-icon="heart"></i>Favoritas</button>
+      <button data-view="foryou"><i data-icon="sparkle"></i>Para ti</button>
+      <button data-view="taste"><i data-icon="chart"></i>Mis gustos</button>
+    </nav>
+    <div class="pl-head">
+      <span>Playlists</span>
+      <button class="icon-btn sm" id="newPlaylist" title="Nueva playlist"><i data-icon="plus"></i></button>
+    </div>
+    <div class="pl-list" id="plList"></div>
+    <nav class="nav bottom">
+      <button data-view="settings"><i data-icon="gear"></i>Ajustes</button>
+    </nav>
+  </aside>
+
+  <main id="view"></main>
+
+  <aside class="queue-panel" id="queuePanel">
+    <div class="qp-head"><b>En cola</b><button class="icon-btn sm" id="closeQueue"><i data-icon="x"></i></button></div>
+    <div id="queueList"></div>
+  </aside>
+
+  <footer class="player" id="player">
+    <canvas class="michi-px michi-perch" data-mood="auto" title="Michi"></canvas>
+    <div class="p-left">
+      <div class="p-thumb" id="pThumb"><canvas class="michi-px" data-mood="auto"></canvas></div>
+      <div class="p-meta">
+        <div class="p-title" id="pTitle">Nada sonando</div>
+        <div class="p-artist" id="pArtist">Pega un link para empezar</div>
+      </div>
+      <button class="icon-btn like" id="pLike" title="Me gusta"><i data-icon="heart"></i></button>
+    </div>
+    <div class="p-center">
+      <div class="p-controls">
+        <button class="icon-btn sm" id="pShuffle" title="Aleatorio"><i data-icon="shuffle"></i></button>
+        <button class="icon-btn" id="pPrev" title="Anterior"><i data-icon="prev"></i></button>
+        <button class="play-btn" id="pPlay" title="Reproducir / pausar"><i data-icon="play"></i></button>
+        <button class="icon-btn" id="pNext" title="Siguiente"><i data-icon="next"></i></button>
+        <button class="icon-btn sm" id="pRepeat" title="Repetir"><i data-icon="repeat"></i></button>
+      </div>
+      <div class="p-progress">
+        <span id="pPos">0:00</span>
+        <div class="bar" id="pBar"><div class="fill" id="pFill"></div><div class="knob" id="pKnob"></div></div>
+        <span id="pDur">0:00</span>
+      </div>
+    </div>
+    <div class="p-right">
+      <button class="icon-btn sm" id="pQueue" title="Cola"><i data-icon="queue"></i></button>
+      <div class="vol"><i data-icon="volume"></i><input type="range" id="pVol" min="0" max="120" value="80"></div>
+      <button class="icon-btn sm" id="pMini" title="Mini reproductor"><i data-icon="mini"></i></button>
+    </div>
+  </footer>
+</div>
+
+<div class="toast" id="toast"></div>
+<div class="modal-bg" id="modalBg"><div class="modal" id="modal"></div></div>
+<div class="menu" id="menu"></div>
+
+<script src="michi_sprites.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+MICHI MUSIC
+===========
+
+Un reproductor de música liviano con Michi. Pegas links (YouTube, YouTube Music,
+SoundCloud, Bandcamp y más), los guardas en tu biblioteca o en playlists, y Michi
+aprende tus géneros favoritos para recomendarte música nueva. No necesita Chrome.
+
+
+INSTALAR (una sola vez)
+-----------------------
+1. Descomprime esta carpeta donde quieras dejarla (por ejemplo en Documentos).
+   No la muevas después, porque el acceso directo apunta ahí.
+2. Doble clic en  instalar.bat
+   - Si no tienes Python, lo instala solo.
+   - Descarga el motor de audio (mpv) y Deno (ayuda con YouTube).
+   - Crea el acceso directo "Michi Music" en tu Escritorio.
+3. Abre Michi Music desde el Escritorio.
+
+
+ACTIVAR LAS RECOMENDACIONES (2 minutos)
+---------------------------------------
+En la app: Ajustes > sigue los 3 pasos para sacar tu clave gratis de Last.fm.
+Sin esa clave la app reproduce y guarda igual, pero no puede saber los géneros.
+
+
+CÓMO SE USA
+-----------
+- Pega un link en "Agregar link" (o Ctrl+V en cualquier momento).
+- Si es una playlist, ves todas las canciones y puedes reproducirlas, guardarlas
+  todas como playlist, o marcar solo las que quieras.
+- Marca con el corazón lo que más te gusta: así Michi aprende más rápido.
+- "Para ti": recomendaciones. "Mis gustos": tus géneros y artistas.
+- Botón del cuadrito (abajo a la derecha): mini reproductor siempre visible.
+- Atajos: Espacio = pausa, Ctrl+flechas = siguiente/anterior, y las teclas
+  multimedia de tu teclado.
+
+
+SI UN LINK DE YOUTUBE DEJA DE FUNCIONAR
+---------------------------------------
+YouTube cambia seguido. Doble clic en  actualizar.bat  y listo.
+
+
+EXTRA: CREAR UN .EXE
+--------------------
+Si quieres una versión que no dependa de Python, después de instalar ejecuta
+crear_exe.bat. Queda en  dist\Michi Music\Michi Music.exe
+
+
+DÓNDE QUEDAN TUS DATOS
+----------------------
+%APPDATA%\MichiMusic  (tu biblioteca, playlists y ajustes). Todo queda en tu PC.
