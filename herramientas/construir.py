@@ -39,6 +39,40 @@ def conseguir_uv():
     return listo
 
 
+def conseguir_libmpv():
+    """libmpv-2.dll (el motor de audio) ya extraído, para meterlo dentro del instalador.
+    El .7z de mpv usa un filtro (BCJ2) que no se puede abrir con Python en la PC del usuario,
+    por eso se saca aquí con 7-Zip."""
+    import json
+    import re
+    import urllib.request
+    cache = os.path.join(BUILD, "cache")
+    os.makedirs(cache, exist_ok=True)
+    listo = os.path.join(cache, "libmpv-2.dll")
+    if os.path.exists(listo):
+        return listo
+    url = os.environ.get("MPV_URL", "")
+    if not url:
+        cab = {"User-Agent": "Miausic-build", "Accept": "application/vnd.github+json"}
+        if os.environ.get("GITHUB_TOKEN"):
+            cab["Authorization"] = "Bearer " + os.environ["GITHUB_TOKEN"]
+        pet = urllib.request.Request("https://api.github.com/repos/shinchiro/mpv-winbuild-cmake/releases/latest", headers=cab)
+        with urllib.request.urlopen(pet, timeout=60) as r:
+            assets = json.load(r)["assets"]
+        url = next(a["browser_download_url"] for a in assets if re.match(r"^mpv-dev-x86_64-\d{8}.*\.7z$", a["name"]))
+    print("Descargando", url)
+    archivo = os.path.join(cache, "mpv-dev.7z")
+    with urllib.request.urlopen(urllib.request.Request(url, headers={"User-Agent": "Miausic-build"}), timeout=300) as r, \
+            open(archivo, "wb") as f:
+        shutil.copyfileobj(r, f)
+    siete = shutil.which("7z") or shutil.which("7za") or r"C:\Program Files\7-Zip\7z.exe"
+    if not os.path.exists(siete):
+        sys.exit("Necesito 7-Zip (7z) para sacar libmpv-2.dll. Linux: apt install p7zip-full")
+    subprocess.check_call([siete, "x", "-y", f"-o{cache}", archivo, "libmpv-2.dll"], stdout=subprocess.DEVNULL)
+    os.remove(archivo)
+    return listo
+
+
 def buscar_makensis():
     for c in (shutil.which("makensis"), r"C:\Program Files (x86)\NSIS\makensis.exe", r"C:\Program Files\NSIS\makensis.exe"):
         if c and os.path.exists(c):
@@ -71,6 +105,8 @@ def main():
     with open(os.path.join(APP, "instalacion", "preparar.ps1"), "w", encoding="utf-8-sig", newline="") as f:
         f.write(texto)
     shutil.copy2(conseguir_uv(), os.path.join(APP, "instalacion", "uv.exe"))
+    os.makedirs(os.path.join(APP, "bin"))
+    shutil.copy2(conseguir_libmpv(), os.path.join(APP, "bin", "libmpv-2.dll"))
 
     os.makedirs(DIST, exist_ok=True)
     salida = os.path.join(DIST, f"Miausic-Setup-{version}.exe")

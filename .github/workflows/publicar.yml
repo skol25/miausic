@@ -21,11 +21,12 @@ jobs:
       - name: Herramientas
         run: |
           sudo apt-get update
-          sudo apt-get install -y nsis
+          sudo apt-get install -y nsis p7zip-full
           pip install pillow
       - name: Construir instalador
         env:
           TAG: ${{ github.event.release.tag_name }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: python herramientas/construir.py --version "${TAG#v}" --repo "${GITHUB_REPOSITORY}"
       - name: Publicar
         uses: softprops/action-gh-release@v2
