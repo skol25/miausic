@@ -1,4 +1,4 @@
-/* Michi Music — interfaz */
+/* Miausic — interfaz */
 "use strict";
 
 const ICONS = {
@@ -451,7 +451,7 @@ async function viewSettings(v) {
     <div class="setting"><h3>Recomendaciones (Last.fm)</h3>
       <p>Michi usa Last.fm para saber el género de cada canción y encontrar artistas parecidos. Es gratis:</p>
       <ol><li>Entra a <a id="lfmLink">last.fm/api/account/create</a> e inicia sesión (o crea una cuenta).</li>
-        <li>En “Application name” escribe <code>Michi Music</code>. Lo demás puede quedar vacío.</li>
+        <li>En “Application name” escribe <code>Miausic</code>. Lo demás puede quedar vacío.</li>
         <li>Copia la <b>API key</b> que te da y pégala aquí abajo.</li></ol>
       <div class="field"><input id="lfmKey" placeholder="API key de Last.fm" value="${esc(s.lastfm_key || "")}" spellcheck="false"><button class="btn primary" id="lfmSave">Guardar</button></div>
     </div>
@@ -492,7 +492,7 @@ function updatePlayer(st) {
     $("#pPos").textContent = fmt(st.position); $("#pDur").textContent = fmt(st.duration);
   }
   if (document.activeElement !== $("#pVol")) $("#pVol").value = st.volume;
-  document.title = t && playing ? `${t.track || t.title} · Michi Music` : "Michi Music";
+  document.title = t && playing ? `${t.track || t.title} · Miausic` : "Miausic";
   updateMichi();
 }
 function updateMichi() { michiTick(); }

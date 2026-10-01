@@ -62,7 +62,7 @@ class LastFM:
             return hit
         q = urllib.parse.urlencode({"method": method, "api_key": self.key, "format": "json",
                                     "autocorrect": 1, **params})
-        req = urllib.request.Request(API + "?" + q, headers={"User-Agent": "MichiMusic/1.0"})
+        req = urllib.request.Request(API + "?" + q, headers={"User-Agent": "Miausic/1.0"})
         try:
             with urllib.request.urlopen(req, timeout=15) as r:
                 data = json.loads(r.read().decode("utf-8"))

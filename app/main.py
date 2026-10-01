@@ -1,4 +1,4 @@
-"""Michi Music — reproductor de música liviano con recomendaciones."""
+"""Miausic — reproductor de música liviano con recomendaciones."""
 import functools
 import os
 import sys
@@ -276,7 +276,7 @@ def setup_media_keys(api):
 def main():
     api = Api()
     window = webview.create_window(
-        "Michi Music", os.path.join(paths.UI_DIR, "index.html"), js_api=api,
+        "Miausic", os.path.join(paths.UI_DIR, "index.html"), js_api=api,
         width=1180, height=760, min_size=(380, 160), background_color="#101012",
     )
     api._window = window

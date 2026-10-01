@@ -1,6 +1,6 @@
 @echo off
 chcp 65001 >nul
-title Actualizando Michi Music
+title Actualizando Miausic
 cd /d "%~dp0"
 echo   Actualizando yt-dlp (arregla links de YouTube que dejan de funcionar)...
 ".venv\Scripts\python.exe" -m pip install -U "yt-dlp[default]" -q

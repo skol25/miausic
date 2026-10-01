@@ -1,10 +1,10 @@
 @echo off
 chcp 65001 >nul
-title Instalando Michi Music
+title Instalando Miausic
 cd /d "%~dp0"
 echo.
 echo   =====================================
-echo     Michi Music - instalacion
+echo     Miausic - instalacion
 echo   =====================================
 echo.
 
@@ -48,11 +48,11 @@ REM 4) Accesos directos en el Escritorio y en el menu Inicio
 powershell -NoProfile -ExecutionPolicy Bypass -Command ^
   "$ws = New-Object -ComObject WScript.Shell;" ^
   "$dirs = @([Environment]::GetFolderPath('Desktop'), (Join-Path ([Environment]::GetFolderPath('Programs')) ''));" ^
-  "foreach ($d in $dirs) { $s = $ws.CreateShortcut((Join-Path $d 'Michi Music.lnk'));" ^
+  "foreach ($d in $dirs) { $s = $ws.CreateShortcut((Join-Path $d 'Miausic.lnk'));" ^
   "$s.TargetPath = '%~dp0.venv\Scripts\pythonw.exe'; $s.Arguments = '\"%~dp0app\main.py\"';" ^
   "$s.WorkingDirectory = '%~dp0'; $s.IconLocation = '%~dp0app\michi.ico'; $s.Save() }"
-echo   [ok] Acceso directo "Michi Music" en tu Escritorio
+echo   [ok] Acceso directo "Miausic" en tu Escritorio
 echo.
-echo   Listo! Abre Michi Music desde el Escritorio.
+echo   Listo! Abre Miausic desde el Escritorio.
 echo.
 pause

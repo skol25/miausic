@@ -1,4 +1,4 @@
-"""Descarga lo que Michi Music necesita en la carpeta bin/:
+"""Descarga lo que Miausic necesita en la carpeta bin/:
 - libmpv-2.dll  (el motor de audio, de mpv)
 - deno.exe      (lo usa yt-dlp para que YouTube funcione bien)
 """
@@ -13,7 +13,7 @@ import zipfile
 ROOT = os.path.dirname(os.path.abspath(__file__))
 BIN = os.path.join(ROOT, "bin")
 os.makedirs(BIN, exist_ok=True)
-UA = {"User-Agent": "MichiMusic-setup"}
+UA = {"User-Agent": "Miausic-setup"}
 
 
 def get(url):

@@ -1,5 +1,5 @@
-MICHI MUSIC
-===========
+MIAUSIC
+=======
 
 Un reproductor de música liviano con Michi. Pegas links (YouTube, YouTube Music,
 SoundCloud, Bandcamp y más), los guardas en tu biblioteca o en playlists, y Michi
@@ -13,8 +13,8 @@ INSTALAR (una sola vez)
 2. Doble clic en  instalar.bat
    - Si no tienes Python, lo instala solo.
    - Descarga el motor de audio (mpv) y Deno (ayuda con YouTube).
-   - Crea el acceso directo "Michi Music" en tu Escritorio.
-3. Abre Michi Music desde el Escritorio.
+   - Crea el acceso directo "Miausic" en tu Escritorio.
+3. Abre Miausic desde el Escritorio.
 
 
 ACTIVAR LAS RECOMENDACIONES (2 minutos)
@@ -43,9 +43,9 @@ YouTube cambia seguido. Doble clic en  actualizar.bat  y listo.
 EXTRA: CREAR UN .EXE
 --------------------
 Si quieres una versión que no dependa de Python, después de instalar ejecuta
-crear_exe.bat. Queda en  dist\Michi Music\Michi Music.exe
+crear_exe.bat. Queda en  dist\Miausic\Miausic.exe
 
 
 DÓNDE QUEDAN TUS DATOS
 ----------------------
-%APPDATA%\MichiMusic  (tu biblioteca, playlists y ajustes). Todo queda en tu PC.
+%APPDATA%\Miausic  (tu biblioteca, playlists y ajustes). Todo queda en tu PC.
