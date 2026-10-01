@@ -14,7 +14,9 @@ paths.setup_bin_path()
 
 import webview  # noqa: E402
 
+import actualizador  # noqa: E402
 import resolver  # noqa: E402
+import version  # noqa: E402
 from db import DB  # noqa: E402
 from player import Player  # noqa: E402
 from recommender import Recommender  # noqa: E402
@@ -232,6 +234,7 @@ class Api:
     @safe
     def settings(self):
         return {"lastfm_key": self._db.get_setting("lastfm_key", ""),
+                "version": version.VERSION, "repo": version.REPO_GITHUB,
                 "data_dir": paths.DATA_DIR,
                 "deno": bool(paths.deno_path())}
 
@@ -243,6 +246,27 @@ class Api:
         self._db.set_setting("lastfm_key", key)
         self._rec.enrich_async()
         return True
+
+    # ---------- actualizaciones ----------
+    @safe
+    def check_update(self, force=False):
+        info = actualizador.buscar(bool(force))
+        if info is None:
+            return {"hay": False, "actual": version.VERSION, "instalado": actualizador.instalado(), "sin_red": True}
+        self._update_info = info
+        return {k: v for k, v in info.items() if k != "revisado"}
+
+    @safe
+    def do_update(self):
+        info = getattr(self, "_update_info", None) or actualizador.buscar(True)
+        if not info or not info.get("hay"):
+            return {"error": "No hay una versión nueva"}
+        threading.Thread(target=actualizador.instalar, args=(info,), daemon=True).start()
+        return True
+
+    @safe
+    def update_status(self):
+        return dict(actualizador.ESTADO)
 
     @safe
     def open_link(self, url):

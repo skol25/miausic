@@ -240,3 +240,6 @@ body.mini .michi-perch{display:none}
   .t-row{grid-template-columns:28px 44px minmax(0,1fr) 52px 104px}
   .t-genres{display:none}
 }
+.update-pill{display:flex;align-items:center;gap:8px;margin:0 2px 8px;padding:9px 12px;border-radius:10px;background:#21170f;border:1px solid #4a3320;color:var(--accent);font-weight:600;text-align:left}
+.update-pill:hover{background:#2a1d12}
+.update-pill i{width:16px;height:16px}

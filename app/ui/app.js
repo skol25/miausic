@@ -455,10 +455,22 @@ async function viewSettings(v) {
         <li>Copia la <b>API key</b> que te da y pégala aquí abajo.</li></ol>
       <div class="field"><input id="lfmKey" placeholder="API key de Last.fm" value="${esc(s.lastfm_key || "")}" spellcheck="false"><button class="btn primary" id="lfmSave">Guardar</button></div>
     </div>
+    <div class="setting"><h3>Versión</h3>
+      <p>Tienes Miausic <b>${esc(s.version || "")}</b>. <span id="updMsg"></span></p>
+      <div class="row-actions" style="margin-top:10px"><button class="btn" id="updCheck">${ic("refresh")}Buscar actualizaciones</button>
+        <button class="btn primary" id="updGo" style="display:none">${ic("save")}Actualizar ahora</button></div></div>
     <div class="setting"><h3>Atajos</h3>
       <p><code>Espacio</code> reproducir/pausar · <code>Ctrl+→</code> siguiente · <code>Ctrl+←</code> anterior · <code>Ctrl+V</code> pegar un link · teclas multimedia del teclado.</p></div>
     <div class="setting"><h3>Tus datos</h3><p>Todo se guarda solo en tu PC, en:<br><code>${esc(s.data_dir || "")}</code></p>
       ${s.deno === false ? '<p style="color:#ff9a9a;margin-top:8px">No encontré Deno en la carpeta bin. Algunos videos de YouTube pueden fallar: vuelve a ejecutar <code>instalar.bat</code>.</p>' : ""}</div>`;
+  const showUpd = (u) => {
+    if (!u) return;
+    $("#updMsg").textContent = u.sin_red ? "No pude revisar (¿sin internet?)." : u.hay ? `Hay una versión nueva: ${u.version} ✨` : "Estás al día.";
+    $("#updGo").style.display = u.hay && u.instalado ? "" : "none";
+    if (u.hay && !u.instalado) $("#updMsg").textContent += " Descárgala desde GitHub (estás usando la carpeta de desarrollo).";
+  };
+  $("#updCheck", v).onclick = async () => { $("#updMsg").textContent = "Revisando…"; showUpd(await call("check_update", true)); };
+  $("#updGo", v).onclick = () => startUpdate();
   $("#lfmLink", v).onclick = () => call("open_link", "https://www.last.fm/api/account/create");
   $("#lfmSave", v).onclick = async () => {
     const b = $("#lfmSave"); b.disabled = true; b.textContent = "Probando…";
@@ -552,6 +564,26 @@ function bindPlayer() {
   });
 }
 
+/* ---------- actualizaciones (igual que en Miauia) ---------- */
+async function startUpdate() {
+  if (!(await call("do_update"))) return;
+  toast("Descargando la versión nueva…");
+  const t = setInterval(async () => {
+    const e = await call("update_status"); if (!e) return;
+    if (e.fase === "descargando") toast(`Descargando… ${Math.round(e.progreso * 100)}%`);
+    if (e.fase === "instalando") { clearInterval(t); toast("Instalando. Miausic se volverá a abrir sola."); }
+    if (e.fase === "error") { clearInterval(t); toast("No se pudo actualizar: " + e.error, true); }
+  }, 700);
+}
+async function checkUpdateQuiet() {
+  const u = await api.check_update(false).catch(() => null);
+  if (!u || !u.hay || !u.instalado) return;
+  const b = document.createElement("button");
+  b.className = "update-pill"; b.innerHTML = `${ic("sparkle")}Nueva versión ${esc(u.version)}`;
+  b.onclick = () => { b.remove(); startUpdate(); };
+  $(".nav.bottom").prepend(b);
+}
+
 /* ---------- arranque ---------- */
 async function start() {
   api = window.pywebview.api;
@@ -562,6 +594,7 @@ async function start() {
   await loadPlaylists();
   render();
   poll(); setInterval(poll, 800);
+  setTimeout(checkUpdateQuiet, 4000);
 }
 if (window.pywebview && window.pywebview.api) start();
 else window.addEventListener("pywebviewready", start);

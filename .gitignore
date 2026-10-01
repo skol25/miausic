@@ -1,7 +1,9 @@
 .venv/
 bin/
+python/
+build/
+dist/
 __pycache__/
 *.pyc
-dist/
-build/
 *.spec
+subir_a_github.bat

@@ -40,10 +40,10 @@ SI UN LINK DE YOUTUBE DEJA DE FUNCIONAR
 YouTube cambia seguido. Doble clic en  actualizar.bat  y listo.
 
 
-EXTRA: CREAR UN .EXE
---------------------
-Si quieres una versión que no dependa de Python, después de instalar ejecuta
-crear_exe.bat. Queda en  dist\Miausic\Miausic.exe
+INSTALADOR .EXE
+---------------
+El instalador Miausic-Setup-X.Y.Z.exe se crea solo en GitHub al publicar una
+versión (mira PUBLICAR.md). Quien lo instale recibe las actualizaciones solas.
 
 
 DÓNDE QUEDAN TUS DATOS

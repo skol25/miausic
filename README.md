@@ -7,9 +7,10 @@ No necesita Chrome.
 
 ## Instalar
 
-1. Descarga el proyecto (botón **Code → Download ZIP**) y descomprímelo.
-2. Doble clic en `instalar.bat`.
-3. Abre **Miausic** desde el Escritorio.
+Descarga **Miausic-Setup.exe** desde [la última versión](https://github.com/skol25/miausic/releases/latest),
+ábrelo y sigue los pasos. El instalador prepara todo solo y la app se actualiza sola cuando hay versión nueva.
+
+(Para desarrollo también puedes usar `instalar.bat` desde esta carpeta.)
 
 Para las recomendaciones, en la app ve a **Ajustes** y pega tu clave gratis de Last.fm.
 Si un link de YouTube deja de funcionar, ejecuta `actualizar.bat`.
